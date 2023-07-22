@@ -1,7 +1,6 @@
 package com.backend.ProyectoInvierno.model;
 
 import jakarta.persistence.*;
-
 import java.sql.Time;
 
 @Entity
