@@ -2,7 +2,9 @@ package com.backend.ProyectoInvierno.controller;
 
 import com.backend.ProyectoInvierno.exception.ResourceNotFoundException;
 import com.backend.ProyectoInvierno.model.Employee;
+import com.backend.ProyectoInvierno.model.Ubicacion;
 import com.backend.ProyectoInvierno.repository.EmployeeRepository;
+import com.backend.ProyectoInvierno.repository.UbicacionRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -10,10 +12,11 @@ import org.springframework.web.bind.annotation.*;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.Optional;
 
 @CrossOrigin(origins = "http://localhost:4200")
 @RestController
-@RequestMapping("/api/v1/")
+@RequestMapping()
 public class EmployeeController {
   @Autowired
   private EmployeeRepository employeeRepository;
@@ -64,4 +67,13 @@ public class EmployeeController {
     response.put("deleted", Boolean.TRUE);
     return ResponseEntity.ok(response);
   }
+
+  @Autowired
+  private UbicacionRepository ubicacionRepository;
+
+  @GetMapping("/u")
+  public ResponseEntity<Optional<Ubicacion>> mostrarU() {
+    return ResponseEntity.ok(ubicacionRepository.findById((long) 3L));
+  }
+
 }

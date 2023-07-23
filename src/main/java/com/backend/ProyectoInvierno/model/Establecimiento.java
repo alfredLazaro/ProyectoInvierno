@@ -1,66 +1,94 @@
 package com.backend.ProyectoInvierno.model;
 
 import jakarta.persistence.*;
-import java.sql.Time;
+import lombok.Data;
+import org.springframework.beans.factory.annotation.Autowired;
 
+import java.sql.Time;
+import java.util.List;
+
+@Data
 @Entity
 @Table(name = "establecimiento")
 @Inheritance(strategy = InheritanceType.JOINED)
 public class Establecimiento {
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "id_establecimiento")
-    private long idEstablecimiento;
+  @Id
+  @GeneratedValue(strategy = GenerationType.IDENTITY)
+  @Column(name = "id_establecimiento")
+  private long idEstablecimiento;
 
-    @Column(name = "nombre")
-    private String nombre;
+  @Column(name = "nombre")
+  private String nombre;
 
-    @Column(name = "descripcion")
-    private String descripcion;
+  @Column(name = "descripcion")
+  private String descripcion;
 
-    @Column(name = "hora_apertura")
-    private Time horaApertura;
+  @Column(name = "hora_apertura")
+  private Time horaApertura;
 
-    @Column(name = "hora_cierre")
-    private Time horaCierre;
+  @Column(name = "hora_cierre")
+  private Time horaCierre;
 
-    public long getIdEstablecimiento() {
-        return idEstablecimiento;
-    }
+  @OneToOne(mappedBy = "establecimiento", cascade = CascadeType.ALL, orphanRemoval = true)
+  @Autowired
+  private Ubicacion ubicacion;
 
-    public void setIdEstablecimiento(long idEstablecimiento) {
-        this.idEstablecimiento = idEstablecimiento;
-    }
+  @OneToMany(mappedBy = "establecimiento", cascade = CascadeType.ALL, orphanRemoval = true)
+  private List<Imagen> imagenes;
 
-    public String getNombre() {
-        return nombre;
-    }
+  @OneToMany(mappedBy = "establecimiento", cascade = CascadeType.ALL, orphanRemoval = true)
+  private List<PaqueteEstablecimiento> paqueteEstablecimientos;
 
-    public void setNombre(String nombre) {
-        this.nombre = nombre;
-    }
 
-    public String getDescripcion() {
-        return descripcion;
-    }
+  @ManyToOne
+  @JoinColumn(name = "id_encargado")
+  private Encargado encargado;
 
-    public void setDescripcion(String descripcion) {
-        this.descripcion = descripcion;
-    }
+  public void setUbicacion(Ubicacion ubicacion) {
+    this.ubicacion = ubicacion;
+  }
 
-    public Time getHoraApertura() {
-        return horaApertura;
-    }
+  public Ubicacion getUbicacion() {
+    return this.ubicacion;
+  }
 
-    public void setHoraApertura(Time horaApertura) {
-        this.horaApertura = horaApertura;
-    }
+  public long getIdEstablecimiento() {
+    return idEstablecimiento;
+  }
 
-    public Time getHoraCierre() {
-        return horaCierre;
-    }
+  public void setIdEstablecimiento(long idEstablecimiento) {
+    this.idEstablecimiento = idEstablecimiento;
+  }
 
-    public void setHoraCierre(Time horaCierre) {
-        this.horaCierre = horaCierre;
-    }
+  public String getNombre() {
+    return nombre;
+  }
+
+  public void setNombre(String nombre) {
+    this.nombre = nombre;
+  }
+
+  public String getDescripcion() {
+    return descripcion;
+  }
+
+  public void setDescripcion(String descripcion) {
+    this.descripcion = descripcion;
+  }
+
+  public Time getHoraApertura() {
+    return horaApertura;
+  }
+
+  public void setHoraApertura(Time horaApertura) {
+    this.horaApertura = horaApertura;
+  }
+
+  public Time getHoraCierre() {
+    return horaCierre;
+  }
+
+  public void setHoraCierre(Time horaCierre) {
+    this.horaCierre = horaCierre;
+  }
 }

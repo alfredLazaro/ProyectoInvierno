@@ -7,18 +7,17 @@ import java.util.List;
 
 @Data
 @Entity
-@Table(name = "ubicacion")
-public class Ubicacion {
+@Table(name = "paquete_establecimiento")
+@Inheritance(strategy = InheritanceType.JOINED)
+public class PaqueteEstablecimiento {
   @Id
   @GeneratedValue(strategy = GenerationType.AUTO)
-  @Column(name = "id_ubicacion")
-  private long id_ubicacion;
-  private String latitud_ubicacion;
-  private String longuityd_ubicacion;
-  private String nombre_ubicacion;
+  @Column(name = "id_paquete")
+  private Long idPaquete;
 
-  @OneToOne
+  @ManyToOne
   @JoinColumn(name = "id_establecimiento")
   private Establecimiento establecimiento;
+
 
 }
