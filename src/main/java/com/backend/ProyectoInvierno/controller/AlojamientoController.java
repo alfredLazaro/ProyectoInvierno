@@ -17,6 +17,8 @@ import java.util.stream.Collectors;
 @RequestMapping("/inf/alojamiento")
 public class AlojamientoController {
   @Autowired
+  private UbicacionRepository ubicacionRepository;
+  @Autowired
   private AlojamientoRepository alojamientoRepository;
   @Autowired
   private EstablecimientoRepository establecimientoRepository;
@@ -24,8 +26,7 @@ public class AlojamientoController {
   private ImagenRepository imagenRepository;
   @Autowired
   private EncargadoRepository encargadoRepository;
-  @Autowired
-  private UbicacionRepository ubicacionRepository;
+
   @Autowired
   private ServicioEstablecimientoRepository servicioEstablecimientoRepository;
   @Autowired
@@ -44,14 +45,14 @@ public class AlojamientoController {
   }
 
   @GetMapping("/{id}")
-  public ResponseEntity<Optional<Alojamiento>> unAlojamiento(@PathVariable Long id) {
-    Optional<Alojamiento> alojamiento = alojamientoRepository.findById(id);
+  public ResponseEntity<Optional<Establecimiento>> unAlojamiento(@PathVariable Long id) {
+    Optional<Establecimiento> alojamiento = establecimientoRepository.findById(id);
     return ResponseEntity.ok(alojamiento);
   }
 
 
   @GetMapping("/ubicaciones")
-  public ResponseEntity<List<Alojamiento>> ubicaciones() {
-    return ResponseEntity.ok(alojamientoRepository.findAll());
+  public ResponseEntity<List<PaqueteEstablecimiento>> ubicaciones() {
+    return ResponseEntity.ok(paqueteEstablecimientoRepository.findAll());
   }
 }

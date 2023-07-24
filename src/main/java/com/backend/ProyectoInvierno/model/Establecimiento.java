@@ -30,7 +30,6 @@ public class Establecimiento {
   private Time horaCierre;
 
   @OneToOne(mappedBy = "establecimiento", cascade = CascadeType.ALL, orphanRemoval = true)
-  @Autowired
   private Ubicacion ubicacion;
 
   @OneToMany(mappedBy = "establecimiento", cascade = CascadeType.ALL, orphanRemoval = true)
@@ -38,7 +37,6 @@ public class Establecimiento {
 
   @OneToMany(mappedBy = "establecimiento", cascade = CascadeType.ALL, orphanRemoval = true)
   private List<PaqueteEstablecimiento> paqueteEstablecimientos;
-
 
   @ManyToOne
   @JoinColumn(name = "id_encargado")
@@ -91,4 +89,21 @@ public class Establecimiento {
   public void setHoraCierre(Time horaCierre) {
     this.horaCierre = horaCierre;
   }
+
+  public List<Imagen> getImagenes() {
+    return imagenes;
+  }
+
+  public void setImagenes(List<Imagen> imagenes) {
+    this.imagenes = imagenes;
+  }
+
+  public List<PaqueteEstablecimiento> getPaqueteEstablecimientos() {
+    return paqueteEstablecimientos;
+  }
+
+  public void setPaqueteEstablecimientos(List<PaqueteEstablecimiento> paqueteEstablecimientos) {
+    this.paqueteEstablecimientos = paqueteEstablecimientos;
+  }
+
 }

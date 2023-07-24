@@ -20,5 +20,28 @@ public class ServicioEstablecimiento {
   @JoinColumn(name = "id_paquete")
   private PaqueteEstablecimiento paqueteEstablecimiento;
 
+  public Long getIdServicioEstablecimiento() {
+    return idServicioEstablecimiento;
+  }
+
+  public void setIdServicioEstablecimiento(Long idServicioEstablecimiento) {
+    this.idServicioEstablecimiento = idServicioEstablecimiento;
+  }
+
+  public String getNombreServicio() {
+    return nombreServicio;
+  }
+
+  public void setNombreServicio(String nombreServicio) {
+    this.nombreServicio = nombreServicio;
+  }
+
+  public String getTipoServicio() {
+    return tipoServicio;
+  }
+
+  public void setTipoServicio(String tipoServicio) {
+    this.tipoServicio = tipoServicio;
+  }
 
 }
