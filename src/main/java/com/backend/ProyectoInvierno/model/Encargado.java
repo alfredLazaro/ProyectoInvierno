@@ -14,7 +14,7 @@ public class Encargado {
     private long id;
 
     @OneToMany
-    @JoinColumn(name = "id_establecimiento", referencedColumnName = "id_encargado")
+    @JoinColumn(name = "id_encargado", referencedColumnName = "id_encargado")
     private List<Establecimiento> establecimientos;
 
     @Column(name = "nombre_encargado")
