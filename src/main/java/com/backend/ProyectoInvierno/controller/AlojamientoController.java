@@ -11,7 +11,6 @@ import org.springframework.web.bind.annotation.RestController;
 
 import java.util.List;
 import java.util.Optional;
-import java.util.stream.Collectors;
 
 @RestController
 @RequestMapping("/inf/alojamiento")
@@ -32,16 +31,11 @@ public class AlojamientoController {
   @Autowired
   private PaqueteEstablecimientoRepository paqueteEstablecimientoRepository;
 
-  @GetMapping
-  public List<Establecimiento> todosLosAlojamientos() {
-    return establecimientoRepository.findAll()
-            .stream()
-            .peek(establecimiento -> {
-              Ubicacion ubicacion = ubicacionRepository.findById(establecimiento.getIdEstablecimiento())
-                      .orElse(null);
-              establecimiento.setUbicacion(ubicacion);
-            })
-            .collect(Collectors.toList());
+  //http://localhost:8080/inf/alojamiento/es/2
+  @GetMapping("/es/{idEstablecimiento}")
+  public Optional<Encargado> todosLosAlojamientos(@PathVariable Long idEstablecimiento) {
+    Long idEncargado = establecimientoRepository.findById(idEstablecimiento).orElse(null).getIdEncargado();
+    return encargadoRepository.findById(idEncargado);
   }
 
   @GetMapping("/{id}")

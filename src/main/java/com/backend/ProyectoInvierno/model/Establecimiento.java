@@ -42,6 +42,10 @@ public class Establecimiento {
   @JoinColumn(name = "id_encargado")
   private Encargado encargado;
 
+  public Long getIdEncargado() {
+    return encargado.getId();
+  }
+
   public void setUbicacion(Ubicacion ubicacion) {
     this.ubicacion = ubicacion;
   }
