@@ -1,24 +1,19 @@
 package com.backend.ProyectoInvierno.service;
 
-import com.backend.ProyectoInvierno.model.Establecimiento;
-import com.backend.ProyectoInvierno.model.Ubicacion;
-import com.backend.ProyectoInvierno.repository.EstablecimientoRepository;
-import com.backend.ProyectoInvierno.repository.UbicacionRepository;
+import com.backend.ProyectoInvierno.repository.EstablishmentRepository;
+import com.backend.ProyectoInvierno.repository.LocationRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import java.util.List;
-import java.util.stream.Collectors;
-
 @Service
 public class EstablecimientoService {
-  private final EstablecimientoRepository establecimientoRepository;
-  private final UbicacionRepository ubicacionRepository;
+  private final EstablishmentRepository establecimientoRepository;
+  private final LocationRepository ubicacionRepository;
 
   @Autowired
   public EstablecimientoService(
-          EstablecimientoRepository establecimientoRepository,
-          UbicacionRepository ubicacionRepository) {
+          EstablishmentRepository establecimientoRepository,
+          LocationRepository ubicacionRepository) {
     this.establecimientoRepository = establecimientoRepository;
     this.ubicacionRepository = ubicacionRepository;
   }
