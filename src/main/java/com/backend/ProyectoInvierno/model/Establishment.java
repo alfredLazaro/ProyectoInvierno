@@ -1,5 +1,7 @@
 package com.backend.ProyectoInvierno.model;
 
+import com.fasterxml.jackson.annotation.JsonProperty;
+import com.fasterxml.jackson.annotation.JsonProperty.Access;
 import jakarta.persistence.*;
 import lombok.Data;
 
@@ -37,8 +39,9 @@ public class Establishment {
   @OneToMany(mappedBy = "establishment", cascade = CascadeType.ALL, orphanRemoval = true)
   private List<EstablishmentPackage> establishmentPackages;
 
-  @ManyToOne
+  @ManyToOne(fetch = FetchType.LAZY, optional = false)
   @JoinColumn(name = "id_resposible")
+  @JsonProperty(access = Access.WRITE_ONLY) // Ignorar propiedad LAZY (no se serealice).
   private ResponsiblePerson responsiblePerson;
 
   public Long getIdResponsible() {

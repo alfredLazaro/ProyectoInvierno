@@ -15,9 +15,8 @@ public class Accommodation extends Establishment {
   @Column(name = "reservation_percentage")
   private int reservationPercentage;
 
-  @ManyToOne
-  @JoinColumn(name = "id_establishment")
-  private Establishment establishment;
+  @Column(name = "details_accomodation")
+  private String detailsAccomodation;
 
   public int getPrice_accommodation() {
     return price_accommodation;
@@ -35,11 +34,11 @@ public class Accommodation extends Establishment {
     this.reservationPercentage = reservationPercentage;
   }
 
-  public Establishment getEstablishment() {
-    return establishment;
+  public String getDetailsAccomodation() {
+    return detailsAccomodation;
   }
 
-  public void setEstablishment(Establishment establishment) {
-    this.establishment = establishment;
+  public void setDetailsAccomodation(String detailsAccomodation) {
+    this.detailsAccomodation = detailsAccomodation;
   }
 }

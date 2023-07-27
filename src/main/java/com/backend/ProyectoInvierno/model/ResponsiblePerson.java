@@ -13,11 +13,10 @@ public class ResponsiblePerson {
   @Column(name = "id_responsible")
   private long id;
 
-  @OneToMany
-  @JoinColumn(name = "id_establishment", referencedColumnName = "id_responsible")
-  private List<Establishment> estestablishments;
+  @OneToMany(mappedBy = "responsiblePerson", cascade = CascadeType.ALL)
+  private List<Establishment> establishments;
 
-  @Column(name = "reponsible_name")
+  @Column(name = "responsible_name")
   private String name;
   @Column(name = "responsible_phone")
   private String responsible_phone;
@@ -41,11 +40,14 @@ public class ResponsiblePerson {
   }
 
   public List<Establishment> getEstestablishments() {
-    return estestablishments;
+    return establishments;
   }
 
   public void setEstestablishments(List<Establishment> estestablishments) {
-    this.estestablishments = estestablishments;
+    this.establishments = estestablishments;
+    for(Establishment establishment : estestablishments){
+      establishment.setResponsiblePerson(this);
+    }
   }
 
 
