@@ -2,9 +2,9 @@ package com.backend.ProyectoInvierno.controller;
 
 import com.backend.ProyectoInvierno.exception.ResourceNotFoundException;
 import com.backend.ProyectoInvierno.model.Employee;
-import com.backend.ProyectoInvierno.model.Ubicacion;
+import com.backend.ProyectoInvierno.model.Location;
 import com.backend.ProyectoInvierno.repository.EmployeeRepository;
-import com.backend.ProyectoInvierno.repository.UbicacionRepository;
+import com.backend.ProyectoInvierno.repository.LocationRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -69,10 +69,10 @@ public class EmployeeController {
   }
 
   @Autowired
-  private UbicacionRepository ubicacionRepository;
+  private LocationRepository ubicacionRepository;
 
   @GetMapping("/u")
-  public ResponseEntity<Optional<Ubicacion>> mostrarU() {
+  public ResponseEntity<Optional<Location>> mostrarU() {
     return ResponseEntity.ok(ubicacionRepository.findById((long) 3L));
   }
 

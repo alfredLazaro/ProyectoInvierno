@@ -14,39 +14,39 @@ import java.util.Optional;
 
 @RestController
 @RequestMapping("/inf/alojamiento")
-public class AlojamientoController {
+public class AccommodationController {
   @Autowired
-  private UbicacionRepository ubicacionRepository;
+  private LocationRepository ubicacionRepository;
   @Autowired
-  private AlojamientoRepository alojamientoRepository;
+  private AccommondationRepository alojamientoRepository;
   @Autowired
-  private EstablecimientoRepository establecimientoRepository;
+  private EstablishmentRepository establecimientoRepository;
   @Autowired
-  private ImagenRepository imagenRepository;
+  private PictureRepository imagenRepository;
   @Autowired
-  private EncargadoRepository encargadoRepository;
+  private ResponsibleRepository encargadoRepository;
 
   @Autowired
-  private ServicioEstablecimientoRepository servicioEstablecimientoRepository;
+  private ServiceEstablishmentRepository servicioEstablecimientoRepository;
   @Autowired
-  private PaqueteEstablecimientoRepository paqueteEstablecimientoRepository;
+  private ParquetEstablishmentRepository paqueteEstablecimientoRepository;
 
   //http://localhost:8080/inf/alojamiento/es/2
   @GetMapping("/es/{idEstablecimiento}")
-  public Optional<Encargado> todosLosAlojamientos(@PathVariable Long idEstablecimiento) {
-    Long idEncargado = establecimientoRepository.findById(idEstablecimiento).orElse(null).getIdEncargado();
+  public Optional<ResponsiblePerson> todosLosAlojamientos(@PathVariable Long idEstablecimiento) {
+    Long idEncargado = establecimientoRepository.findById(idEstablecimiento).orElse(null).getIdResponsible();
     return encargadoRepository.findById(idEncargado);
   }
 
   @GetMapping("/{id}")
-  public ResponseEntity<Optional<Establecimiento>> unAlojamiento(@PathVariable Long id) {
-    Optional<Establecimiento> alojamiento = establecimientoRepository.findById(id);
+  public ResponseEntity<Optional<Establishment>> unAlojamiento(@PathVariable Long id) {
+    Optional<Establishment> alojamiento = establecimientoRepository.findById(id);
     return ResponseEntity.ok(alojamiento);
   }
 
 
   @GetMapping("/ubicaciones")
-  public ResponseEntity<List<PaqueteEstablecimiento>> ubicaciones() {
+  public ResponseEntity<List<EstablishmentPackage>> ubicaciones() {
     return ResponseEntity.ok(paqueteEstablecimientoRepository.findAll());
   }
 }
