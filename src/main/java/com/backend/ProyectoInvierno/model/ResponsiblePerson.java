@@ -39,13 +39,13 @@ public class ResponsiblePerson {
     this.id = id;
   }
 
-  public List<Establishment> getEstestablishments() {
+  public List<Establishment> getEstablishments() {
     return establishments;
   }
 
-  public void setEstestablishments(List<Establishment> estestablishments) {
-    this.establishments = estestablishments;
-    for(Establishment establishment : estestablishments){
+  public void setEstablishments(List<Establishment> establishments) {
+    this.establishments = establishments;
+    for(Establishment establishment : establishments){
       establishment.setResponsiblePerson(this);
     }
   }

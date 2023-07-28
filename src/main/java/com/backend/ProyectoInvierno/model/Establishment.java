@@ -94,6 +94,9 @@ public class Establishment {
 
   public void setPictures(List<Picture> pictures) {
     this.pictures = pictures;
+    for(Picture picture : pictures){
+      picture.setEstablishment(this);
+    }
   }
 
   public List<EstablishmentPackage> getEstablishmentPackages() {

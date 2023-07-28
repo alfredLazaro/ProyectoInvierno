@@ -1,6 +1,7 @@
 package com.backend.ProyectoInvierno.model;
 
 
+import com.fasterxml.jackson.annotation.JsonProperty;
 import jakarta.persistence.*;
 import lombok.Data;
 
@@ -19,8 +20,9 @@ public class Picture {
   @Column(name = "establishment_picture")
   private String establishment_picture; //Usado como direccion de la imagen
 
-  @ManyToOne
+  @ManyToOne(fetch = FetchType.LAZY)
   @JoinColumn(name = "id_establishment")
+  @JsonProperty(access = JsonProperty.Access.WRITE_ONLY)
   private Establishment establishment;
 
   public Picture(){
@@ -53,6 +55,14 @@ public class Picture {
 
   public void setEstablishment_picture(String establishment_picture) {
     this.establishment_picture = establishment_picture;
+  }
+
+  public Establishment getEstablishment() {
+    return establishment;
+  }
+
+  public void setEstablishment(Establishment establishment) {
+    this.establishment = establishment;
   }
 
 }

@@ -16,7 +16,8 @@ public class StorageService {
     @Autowired
     private PictureRepository pictureRepository;
 
-    private final String FOLDER_PATH="/home/mauhv/images/"; //Cambiar a directorio interno
+    // private final String FOLDER_PATH="/home/mauhv/images/"; //Cambiar a directorio interno
+    private static String FOLDER_PATH = System.getProperty("user.dir") + "/images/";
 
     public String uploadImageToFileSystem(MultipartFile file) throws IOException {
         String filePath=FOLDER_PATH+file.getOriginalFilename();
@@ -26,7 +27,7 @@ public class StorageService {
         file.transferTo(new File(filePath));
 
         if (fileData != null) {
-            return "file uploaded successfully : " + filePath;
+            return file.getOriginalFilename();
         }
         return null;
     }
