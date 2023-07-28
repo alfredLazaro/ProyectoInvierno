@@ -61,9 +61,6 @@ public class Establishment {
     this.idEstablishment = idEstablishment;
   }
 
-  public String getDescription() {
-    return description;
-  }
 
   public void setDescription(String description) {
     this.description = description;
@@ -109,11 +106,12 @@ public class Establishment {
     this.name = name;
   }
 
-  public ResponsiblePerson getResponsiblePerson() {
-    return responsiblePerson;
+  public String getDescription() {
+    return description;
   }
 
-  public void setResponsiblePerson(ResponsiblePerson responsiblePerson) {
-    this.responsiblePerson = responsiblePerson;
+  public void setDescripton(String description) {
+    this.description = description;
   }
+
 }

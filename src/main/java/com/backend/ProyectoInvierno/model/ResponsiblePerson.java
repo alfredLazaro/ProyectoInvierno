@@ -15,7 +15,7 @@ public class ResponsiblePerson {
 
   @OneToMany
   @JoinColumn(name = "id_establishment", referencedColumnName = "id_responsible")
-  private List<Establishment> estestablishments;
+  private List<Establishment> establishments;
 
   @Column(name = "reponsible_name")
   private String name;
@@ -40,12 +40,12 @@ public class ResponsiblePerson {
     this.id = id;
   }
 
-  public List<Establishment> getEstestablishments() {
-    return estestablishments;
+  public List<Establishment> getEstablishments() {
+    return establishments;
   }
 
-  public void setEstestablishments(List<Establishment> estestablishments) {
-    this.estestablishments = estestablishments;
+  public void setEstablishments(List<Establishment> establishments) {
+    this.establishments = establishments;
   }
 
 

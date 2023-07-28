@@ -35,11 +35,4 @@ public class Accommodation extends Establishment {
     this.reservationPercentage = reservationPercentage;
   }
 
-  public Establishment getEstablishment() {
-    return establishment;
-  }
-
-  public void setEstablishment(Establishment establishment) {
-    this.establishment = establishment;
-  }
 }
