@@ -24,6 +24,10 @@ public class Establishment {
   @Column(name = "description")
   private String description;
 
+  public void setIdEstablishment(long idEstablishment) {
+    this.idEstablishment = idEstablishment;
+  }
+
   @Column(name = "opening_time")
   private Time openingTime;
 
@@ -60,9 +64,6 @@ public class Establishment {
     return idEstablishment;
   }
 
-  public void setIdEstablishment(long idEstablishment) {
-    this.idEstablishment = idEstablishment;
-  }
 
   public String getDescription() {
     return description;
