@@ -13,8 +13,8 @@ public class ResponsiblePerson {
   @Column(name = "id_responsible")
   private long id;
 
-  @OneToMany
-  @JoinColumn(name = "id_establishment", referencedColumnName = "id_responsible")
+  //@JoinColumn(name = "id_establishment", referencedColumnName = "id_responsible")
+  @OneToMany(mappedBy = "responsiblePerson")
   private List<Establishment> establishments;
 
   @Column(name = "reponsible_name")

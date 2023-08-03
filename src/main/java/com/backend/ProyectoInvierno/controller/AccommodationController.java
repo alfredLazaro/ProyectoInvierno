@@ -9,44 +9,38 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import java.util.Arrays;
 import java.util.List;
-import java.util.Optional;
 
 @RestController
 @RequestMapping("/inf/alojamiento")
 public class AccommodationController {
-  @Autowired
-  private LocationRepository ubicacionRepository;
-  @Autowired
-  private AccommondationRepository alojamientoRepository;
-  @Autowired
-  private EstablishmentRepository establecimientoRepository;
-  @Autowired
-  private PictureRepository imagenRepository;
-  @Autowired
-  private ResponsibleRepository encargadoRepository;
 
   @Autowired
-  private ServiceEstablishmentRepository servicioEstablecimientoRepository;
-  @Autowired
-  private ParquetEstablishmentRepository paqueteEstablecimientoRepository;
+  private EstablishmentRepository establishmentRepository;
 
-  //http://localhost:8080/inf/alojamiento/es/2
+  @Autowired
+  private ResponsibleRepository responsibleRepository;
+
   @GetMapping("/es/{idEstablecimiento}")
-  public Optional<ResponsiblePerson> todosLosAlojamientos(@PathVariable Long idEstablecimiento) {
-    Long idEncargado = establecimientoRepository.findById(idEstablecimiento).orElse(null).getIdResponsible();
-    return encargadoRepository.findById(idEncargado);
+  public List<ResponsiblePerson> todosLosAlojamientos(@PathVariable Long idEstablecimiento) {
+    System.out.println(idEstablecimiento);
+    Long idEncargado = establishmentRepository.findById(idEstablecimiento).orElse(null).getIdResponsible();
+    System.out.println(idEncargado);
+    List<Long> ids = Arrays.asList(idEncargado);
+    return responsibleRepository.findAllById(ids);
   }
 
-  @GetMapping("/{id}")
-  public ResponseEntity<Optional<Establishment>> unAlojamiento(@PathVariable Long id) {
-    Optional<Establishment> alojamiento = establecimientoRepository.findById(id);
-    return ResponseEntity.ok(alojamiento);
+  @GetMapping("/{idEstablecimiento}")
+  public ResponseEntity<ResponsiblePerson> unAlojamiento(@PathVariable Long idEstablecimiento) {
+    ResponsiblePerson responsiblePerson = responsibleRepository.findForId(idEstablecimiento);
+    return ResponseEntity.ok(responsiblePerson);
   }
 
 
-  @GetMapping("/ubicaciones")
-  public ResponseEntity<List<EstablishmentPackage>> ubicaciones() {
-    return ResponseEntity.ok(paqueteEstablecimientoRepository.findAll());
+  @GetMapping()
+  public ResponseEntity<List<Establishment>> accommodationList() {
+    return ResponseEntity.ok(establishmentRepository.findAllEstablishments());
   }
+
 }
