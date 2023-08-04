@@ -2,7 +2,9 @@ package com.backend.ProyectoInvierno.controller;
 
 import com.backend.ProyectoInvierno.exception.ResourceNotFoundException;
 import com.backend.ProyectoInvierno.model.Employee;
+import com.backend.ProyectoInvierno.model.Location;
 import com.backend.ProyectoInvierno.repository.EmployeeRepository;
+import com.backend.ProyectoInvierno.repository.LocationRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -10,10 +12,11 @@ import org.springframework.web.bind.annotation.*;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.Optional;
 
 @CrossOrigin(origins = "http://localhost:4200")
 @RestController
-@RequestMapping("/api/v1/")
+@RequestMapping()
 public class EmployeeController {
   @Autowired
   private EmployeeRepository employeeRepository;
@@ -58,10 +61,10 @@ public class EmployeeController {
   public ResponseEntity<Map<String, Boolean>> deleteEmployee(@PathVariable Long id) {
     Employee employee = employeeRepository.findById(id)
             .orElseThrow(() -> new ResourceNotFoundException("Employee not exist with id :" + id));
-
     employeeRepository.delete(employee);
     Map<String, Boolean> response = new HashMap<>();
     response.put("deleted", Boolean.TRUE);
     return ResponseEntity.ok(response);
   }
+
 }
