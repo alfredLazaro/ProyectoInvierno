@@ -9,8 +9,11 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.Collection;
 import java.util.List;
+import java.util.stream.Collectors;
 
 @RestController
 @RequestMapping("/inf/alojamiento")
@@ -31,10 +34,19 @@ public class AccommodationController {
     return responsibleRepository.findAllById(ids);
   }
 
-  @GetMapping("/{idEstablecimiento}")
-  public ResponseEntity<ResponsiblePerson> unAlojamiento(@PathVariable Long idEstablecimiento) {
-    ResponsiblePerson responsiblePerson = responsibleRepository.findForId(idEstablecimiento);
-    return ResponseEntity.ok(responsiblePerson);
+  @GetMapping("/{idEstablishment}")
+  public ResponseEntity<ResponsiblePerson> unAlojamiento(@PathVariable Long idEstablishment) {
+    ResponsiblePerson responsiblePerson = responsibleRepository.findForId(idEstablishment);
+    Establishment establishment = responsiblePerson.getEstablishments().stream().
+            filter(establishmen -> establishmen.getIdEstablishment()== idEstablishment).findFirst().get();
+    ResponsiblePerson responsiblePerson1 = new ResponsiblePerson();
+    responsiblePerson1.setId(responsiblePerson.getId());
+    responsiblePerson1.setName(responsiblePerson.getName());
+    List<Establishment> est = new ArrayList<>();
+    est.add(establishment);
+    responsiblePerson1.setEstablishments(est);
+
+    return ResponseEntity.ok(responsiblePerson1);
   }
 
 
