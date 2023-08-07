@@ -114,4 +114,11 @@ public class Establishment {
     this.description = description;
   }
 
+  public ResponsiblePerson getResponsiblePerson() {
+    return responsiblePerson;
+  }
+
+  public void setResponsiblePerson(ResponsiblePerson responsiblePerson) {
+    this.responsiblePerson = responsiblePerson;
+  }
 }

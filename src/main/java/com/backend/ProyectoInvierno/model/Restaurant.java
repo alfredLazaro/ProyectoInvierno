@@ -19,4 +19,40 @@ public class Restaurant extends Establishment {
   @JoinColumn(name = "id_establishment")
   private Establishment establishment;
 
+  private String cookingKind;
+
+  public Restaurant() {
+  }
+
+  public int getPriceRestaurant() {
+    return priceRestaurant;
+  }
+
+  public void setPriceRestaurant(int priceRestaurant) {
+    this.priceRestaurant = priceRestaurant;
+  }
+
+  public int getPercentajeReservation() {
+    return percentajeReservation;
+  }
+
+  public void setPercentajeReservation(int percentajeReservation) {
+    this.percentajeReservation = percentajeReservation;
+  }
+
+  public Establishment getEstablishment() {
+    return establishment;
+  }
+
+  public void setEstablishment(Establishment establishment) {
+    this.establishment = establishment;
+  }
+
+  public String getCookingKind() {
+    return cookingKind;
+  }
+
+  public void setCookingKind(String cookingKind) {
+    this.cookingKind = cookingKind;
+  }
 }
