@@ -4,28 +4,28 @@ package com.backend.ProyectoInvierno.model;
 import jakarta.persistence.*;
 
 
-@Table(name = "establichment_service")
-@Entity(name = "establichment_service")
+@Table(name = "establishment_service")
+@Entity(name = "establishment_service")
 public class EstablishmentService {
   @Id
   @GeneratedValue(strategy = GenerationType.AUTO)
-  @Column(name = "id_establichment_service")
-  private Long idEstablichmentService;
+  @Column(name = "id_establishment_service")
+  private Long idEstablishmentService;
   @Column(name = "service_name")
   private String serviceName;
-  @Column(name = "tipo_servicio")
-  private String tipoServicio;
+  @Column(name = "type_service")
+  private String typeService;
 
   @ManyToOne
   @JoinColumn(name = "id_package")
   private EstablishmentPackage establishmentPackage;
 
-  public Long getIdEstablichmentService() {
-    return idEstablichmentService;
+  public Long getIdEstablishmentService() {
+    return idEstablishmentService;
   }
 
-  public void setIdEstablichmentService(Long idEstablichmentService) {
-    this.idEstablichmentService = idEstablichmentService;
+  public void setIdEstablishmentService(Long idEstablishmentService) {
+    this.idEstablishmentService = idEstablishmentService;
   }
 
   public String getServiceName() {
@@ -36,12 +36,12 @@ public class EstablishmentService {
     this.serviceName = serviceName;
   }
 
-  public String getTipoServicio() {
-    return tipoServicio;
+  public String getTypeService() {
+    return typeService;
   }
 
-  public void setTipoServicio(String tipoServicio) {
-    this.tipoServicio = tipoServicio;
+  public void setTypeService(String typeService) {
+    this.typeService = typeService;
   }
 
 }

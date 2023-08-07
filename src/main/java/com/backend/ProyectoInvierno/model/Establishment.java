@@ -65,9 +65,6 @@ public class Establishment {
   }
 
 
-  public String getDescription() {
-    return description;
-  }
 
   public void setDescription(String description) {
     this.description = description;
@@ -114,6 +111,14 @@ public class Establishment {
 
   public void setName(String name) {
     this.name = name;
+  }
+
+  public String getDescription() {
+    return description;
+  }
+
+  public void setDescripton(String description) {
+    this.description = description;
   }
 
   public ResponsiblePerson getResponsiblePerson() {

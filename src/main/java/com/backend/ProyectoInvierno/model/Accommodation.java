@@ -33,7 +33,6 @@ public class Accommodation extends Establishment {
   public void setReservationPercentage(int reservationPercentage) {
     this.reservationPercentage = reservationPercentage;
   }
-
   public String getDetailsAccommodation() {
     return detailsAccommodation;
   }
@@ -41,4 +40,5 @@ public class Accommodation extends Establishment {
   public void setDetailsAccommodation(String detailsAccomodation) {
     this.detailsAccommodation = detailsAccomodation;
   }
+
 }

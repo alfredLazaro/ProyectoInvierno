@@ -16,7 +16,7 @@ public class Location {
   @Column(name = "longitude_location")
   private String longitude_location;
   @Column(name = "nombre_ubicacion")
-  private String nombre_ubicacion;
+  private String location_name;
 
   public long getId_location() {
     return id_location;
@@ -42,12 +42,12 @@ public class Location {
     this.longitude_location = longitude_location;
   }
 
-  public String getNombre_ubicacion() {
-    return nombre_ubicacion;
+  public String getLocation_name() {
+    return location_name;
   }
 
-  public void setNombre_ubicacion(String nombre_ubicacion) {
-    this.nombre_ubicacion = nombre_ubicacion;
+  public void setLocation_name(String location_name) {
+    this.location_name = location_name;
   }
 
   @OneToOne

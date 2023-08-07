@@ -7,8 +7,11 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import com.backend.ProyectoInvierno.model.Accommodation;
 
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.Collection;
 import java.util.List;
-import java.util.Optional;
+import java.util.stream.Collectors;
 
 @CrossOrigin(origins = "http://localhost:3000")
 @RestController
@@ -26,21 +29,33 @@ public class AccommodationController {
   private ResponsibleRepository encargadoRepository;
 
   @Autowired
-  private ServiceEstablishmentRepository servicioEstablecimientoRepository;
-  @Autowired
-  private ParquetEstablishmentRepository paqueteEstablecimientoRepository;
+  private EstablishmentRepository establishmentRepository;
 
-  //http://localhost:8080/inf/alojamiento/es/2
+  @Autowired
+  private ResponsibleRepository responsibleRepository;
+
   @GetMapping("/es/{idEstablecimiento}")
-  public Optional<ResponsiblePerson> todosLosAlojamientos(@PathVariable Long idEstablecimiento) {
-    Long idEncargado = establecimientoRepository.findById(idEstablecimiento).orElse(null).getIdResponsible();
-    return encargadoRepository.findById(idEncargado);
+  public List<ResponsiblePerson> todosLosAlojamientos(@PathVariable Long idEstablecimiento) {
+    System.out.println(idEstablecimiento);
+    Long idEncargado = establishmentRepository.findById(idEstablecimiento).orElse(null).getIdResponsible();
+    System.out.println(idEncargado);
+    List<Long> ids = Arrays.asList(idEncargado);
+    return responsibleRepository.findAllById(ids);
   }
 
-  @GetMapping("/{id}")
-  public ResponseEntity<Optional<Establishment>> unAlojamiento(@PathVariable Long id) {
-    Optional<Establishment> alojamiento = establecimientoRepository.findById(id);
-    return ResponseEntity.ok(alojamiento);
+  @GetMapping("/{idEstablishment}")
+  public ResponseEntity<ResponsiblePerson> unAlojamiento(@PathVariable Long idEstablishment) {
+    ResponsiblePerson responsiblePerson = responsibleRepository.findForId(idEstablishment);
+    Establishment establishment = responsiblePerson.getEstablishments().stream().
+            filter(establishmen -> establishmen.getIdEstablishment()== idEstablishment).findFirst().get();
+    ResponsiblePerson responsiblePerson1 = new ResponsiblePerson();
+    responsiblePerson1.setId(responsiblePerson.getId());
+    responsiblePerson1.setName(responsiblePerson.getName());
+    List<Establishment> est = new ArrayList<>();
+    est.add(establishment);
+    responsiblePerson1.setEstablishments(est);
+
+    return ResponseEntity.ok(responsiblePerson1);
   }
 
   @PostMapping
@@ -49,8 +64,9 @@ public class AccommodationController {
   }
 
 
-  @GetMapping("/ubicaciones")
-  public ResponseEntity<List<EstablishmentPackage>> ubicaciones() {
-    return ResponseEntity.ok(paqueteEstablecimientoRepository.findAll());
+  @GetMapping()
+  public ResponseEntity<List<Establishment>> accommodationList() {
+    return ResponseEntity.ok(establishmentRepository.findAllEstablishments());
   }
+
 }
