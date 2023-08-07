@@ -61,19 +61,10 @@ public class EmployeeController {
   public ResponseEntity<Map<String, Boolean>> deleteEmployee(@PathVariable Long id) {
     Employee employee = employeeRepository.findById(id)
             .orElseThrow(() -> new ResourceNotFoundException("Employee not exist with id :" + id));
-
     employeeRepository.delete(employee);
     Map<String, Boolean> response = new HashMap<>();
     response.put("deleted", Boolean.TRUE);
     return ResponseEntity.ok(response);
-  }
-
-  @Autowired
-  private LocationRepository ubicacionRepository;
-
-  @GetMapping("/u")
-  public ResponseEntity<Optional<Location>> mostrarU() {
-    return ResponseEntity.ok(ubicacionRepository.findById((long) 3L));
   }
 
 }
