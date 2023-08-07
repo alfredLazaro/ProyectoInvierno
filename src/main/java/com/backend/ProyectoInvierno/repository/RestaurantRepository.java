@@ -1,10 +1,9 @@
 package com.backend.ProyectoInvierno.repository;
 
-import com.backend.ProyectoInvierno.model.Employee;
+import com.backend.ProyectoInvierno.model.Restaurant;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 
 @Repository
-public interface EmployeeRepository extends JpaRepository<Employee, Long> {
-
+public interface RestaurantRepository extends JpaRepository<Restaurant,Long> {
 }
