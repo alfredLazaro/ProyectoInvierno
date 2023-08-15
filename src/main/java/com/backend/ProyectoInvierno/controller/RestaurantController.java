@@ -11,10 +11,9 @@ import com.backend.ProyectoInvierno.repository.PictureRepository;
 import com.backend.ProyectoInvierno.repository.ResponsibleRepository;
 import com.backend.ProyectoInvierno.repository.RestaurantRepository;
 import java.sql.Time;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+
+import org.springframework.web.bind.annotation.*;
+
 /*
 Nombre del restaurante.
 Dirección del restaurante.
@@ -69,4 +68,13 @@ public class RestaurantController {
 
     return establishment;
   }
+  @GetMapping("/all")
+  public Iterable<Establishment> getAll(){
+    return establishmentRepository.findAll();
+  }
+  @GetMapping("/{id}")
+    public Establishment getRestaurant(@PathVariable Long id){
+      return establishmentRepository.findById(id).orElse(null);
+  }
+
 }
