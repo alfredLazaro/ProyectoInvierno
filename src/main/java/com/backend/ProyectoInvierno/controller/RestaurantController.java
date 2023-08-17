@@ -87,5 +87,25 @@ public class RestaurantController {
         auxResponsibl.setEstablishments(establishments);
       return ResponseEntity.ok(auxResponsibl);
   }
+  @DeleteMapping("/delet/{id}")
+    public ResponseEntity<ResponsiblePerson> deleteRestaurant(@PathVariable Long id){
+      ResponsiblePerson responsiblePerson,auxResponsibl;
+      //responsiblePerson= responsibleRepository.findById(id).orElse(null);/* es obtiene el responsable pero le damo id del establecimiento*/
+        responsiblePerson = establishmentRepository.findById(id).orElse(null).getResponsiblePerson();
+      Establishment establishment=responsiblePerson.getEstablishments().stream()
+              .findFirst().filter(establishmen -> establishmen.getIdEstablishment() ==id).orElse(null);
+      auxResponsibl= new ResponsiblePerson();
+      if(establishment==null){
+          return ResponseEntity.notFound().build();
+      }else{
+          responsibleRepository.deleteById(id);
+      }
+        auxResponsibl.setId(responsiblePerson.getId());
+        auxResponsibl.setName(responsiblePerson.getName());
+        List<Establishment> establishments = new ArrayList<>();
+        establishments.add(establishment);
+        auxResponsibl.setEstablishments(establishments);
+        return ResponseEntity.ok(auxResponsibl);
+  }
 
 }

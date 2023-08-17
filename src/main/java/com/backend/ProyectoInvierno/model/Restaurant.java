@@ -40,8 +40,8 @@ public class Restaurant extends Establishment {
     this.percentajeReservation = percentajeReservation;
   }
 
-  public Establishment getEstablishment() {
-    return establishment;
+  public long getEstablishment() {
+    return establishment.getIdEstablishment();
   }
 
   public void setEstablishment(Establishment establishment) {
