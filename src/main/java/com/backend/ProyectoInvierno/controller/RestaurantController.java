@@ -3,17 +3,17 @@ package com.backend.ProyectoInvierno.controller;
 import com.backend.ProyectoInvierno.dto.RestaurantDto;
 import com.backend.ProyectoInvierno.model.Establishment;
 import com.backend.ProyectoInvierno.model.Location;
-import com.backend.ProyectoInvierno.model.Picture;
 import com.backend.ProyectoInvierno.model.ResponsiblePerson;
 import com.backend.ProyectoInvierno.repository.EstablishmentRepository;
 import com.backend.ProyectoInvierno.repository.LocationRepository;
 import com.backend.ProyectoInvierno.repository.PictureRepository;
 import com.backend.ProyectoInvierno.repository.ResponsibleRepository;
 import com.backend.ProyectoInvierno.repository.RestaurantRepository;
-import java.sql.Time;
+
 import java.util.ArrayList;
 import java.util.List;
 
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 /*
@@ -75,7 +75,7 @@ public class RestaurantController {
     return establishmentRepository.findAll();
   }
   @GetMapping("/{id}")
-    public Establishment getRestaurant(@PathVariable Long id){
+    public ResponseEntity<ResponsiblePerson> getRestaurant(@PathVariable Long id){
       ResponsiblePerson responsiblePerson = responsibleRepository.findById(id).orElse(null);
       Establishment establishment=responsiblePerson.getEstablishments().stream()
               .findFirst().filter(establishmen -> establishmen.getIdEstablishment() == id).orElse(null);
@@ -85,7 +85,7 @@ public class RestaurantController {
         List<Establishment> establishments = new ArrayList<>();
         establishments.add(establishment);
         auxResponsibl.setEstablishments(establishments);
-      return establishmentRepository.findById(id).orElse(null);
+      return ResponseEntity.ok(auxResponsibl);
   }
 
 }
