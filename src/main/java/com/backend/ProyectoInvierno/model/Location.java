@@ -15,7 +15,7 @@ public class Location {
   private String latitude_location;
   @Column(name = "longitude_location")
   private String longitude_location;
-  @Column(name = "nombre_ubicacion")
+  @Column(name = "location_name")
   private String location_name;
 
   public long getId_location() {
@@ -52,6 +52,13 @@ public class Location {
 
   @OneToOne
   @JoinColumn(name = "id_establishment")
+  @GeneratedValue(strategy = GenerationType.SEQUENCE)
   private Establishment establishment;
 
+  public Long getEstablishment() {
+    if(establishment != null){
+      return establishment.getIdEstablishment();
+    }
+    return null;
+  }
 }

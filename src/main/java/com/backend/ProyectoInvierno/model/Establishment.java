@@ -14,7 +14,7 @@ import java.util.List;
 @Inheritance(strategy = InheritanceType.JOINED)
 public class Establishment {
   @Id
-  @GeneratedValue(strategy = GenerationType.IDENTITY)
+  @GeneratedValue(strategy = GenerationType.AUTO)
   @Column(name = "id_establishment")
   private long idEstablishment;
 

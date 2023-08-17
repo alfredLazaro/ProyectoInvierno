@@ -64,6 +64,7 @@ public class AccommodationController {
   }
 
 
+
   @GetMapping()
   public ResponseEntity<List<Establishment>> accommodationList() {
     return ResponseEntity.ok(establishmentRepository.findAllEstablishments());
