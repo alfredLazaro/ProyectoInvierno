@@ -9,24 +9,14 @@ import com.backend.ProyectoInvierno.model.Accommodation;
 
 import java.util.ArrayList;
 import java.util.Arrays;
-import java.util.Collection;
 import java.util.List;
-import java.util.stream.Collectors;
 
 @CrossOrigin(origins = "http://localhost:3000")
 @RestController
 @RequestMapping("/inf/alojamiento")
 public class AccommodationController {
   @Autowired
-  private LocationRepository ubicacionRepository;
-  @Autowired
   private AccommondationRepository accommondationRepository;
-  @Autowired
-  private EstablishmentRepository establecimientoRepository;
-  @Autowired
-  private PictureRepository imagenRepository;
-  @Autowired
-  private ResponsibleRepository encargadoRepository;
 
   @Autowired
   private EstablishmentRepository establishmentRepository;
@@ -34,12 +24,12 @@ public class AccommodationController {
   @Autowired
   private ResponsibleRepository responsibleRepository;
 
-  @GetMapping("/es/{idEstablecimiento}")
-  public List<ResponsiblePerson> todosLosAlojamientos(@PathVariable Long idEstablecimiento) {
-    System.out.println(idEstablecimiento);
-    Long idEncargado = establishmentRepository.findById(idEstablecimiento).orElse(null).getIdResponsible();
-    System.out.println(idEncargado);
-    List<Long> ids = Arrays.asList(idEncargado);
+  @GetMapping("/es/{idEstablishment}")
+  public List<ResponsiblePerson> todosLosAlojamientos(@PathVariable Long idEstablishment) {
+    System.out.println(idEstablishment);
+    Long idResponsible = establishmentRepository.findById(idEstablishment).orElse(null).getIdResponsible();
+    System.out.println(idResponsible);
+    List<Long> ids = Arrays.asList(idResponsible);
     return responsibleRepository.findAllById(ids);
   }
 
@@ -59,7 +49,7 @@ public class AccommodationController {
   }
 
   @PostMapping
-  public Accommodation createAccomodation(@RequestBody Accommodation accommodation){
+  public Accommodation createAccommodation(@RequestBody Accommodation accommodation){
     return accommondationRepository.save(accommodation);
   }
 
