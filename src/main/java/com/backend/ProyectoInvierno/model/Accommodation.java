@@ -15,7 +15,7 @@ public class Accommodation extends Establishment {
   @Column(name = "reservation_percentage")
   private int reservationPercentage;
 
-  @Column(name = "details_accomodation")
+  @Column(name = "details_accommodation")
   private String detailsAccommodation;
 
   public int getPrice_accommodation() {
@@ -37,8 +37,8 @@ public class Accommodation extends Establishment {
     return detailsAccommodation;
   }
 
-  public void setDetailsAccommodation(String detailsAccomodation) {
-    this.detailsAccommodation = detailsAccomodation;
+  public void setDetailsAccommodation(String detailsAccommodation) {
+    this.detailsAccommodation = detailsAccommodation;
   }
 
 }

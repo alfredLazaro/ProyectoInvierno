@@ -45,7 +45,7 @@ public class Establishment {
 
   @ManyToOne(fetch = FetchType.LAZY, optional = false)
   @JoinColumn(name = "id_resposible")
-  @JsonProperty(access = Access.WRITE_ONLY) // Ignorar propiedad LAZY (no se serealice).
+  @JsonProperty(access = Access.WRITE_ONLY) // Ignorar propiedad LAZY (no se serialize).
   private ResponsiblePerson responsiblePerson;
 
   public Long getIdResponsible() {
@@ -63,8 +63,6 @@ public class Establishment {
   public long getIdEstablishment() {
     return idEstablishment;
   }
-
-
 
   public void setDescription(String description) {
     this.description = description;
@@ -115,10 +113,6 @@ public class Establishment {
 
   public String getDescription() {
     return description;
-  }
-
-  public void setDescripton(String description) {
-    this.description = description;
   }
 
   public ResponsiblePerson getResponsiblePerson() {
