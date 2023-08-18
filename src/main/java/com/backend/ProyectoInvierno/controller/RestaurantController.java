@@ -4,6 +4,7 @@ import com.backend.ProyectoInvierno.dto.RestaurantDto;
 import com.backend.ProyectoInvierno.model.Establishment;
 import com.backend.ProyectoInvierno.model.Location;
 import com.backend.ProyectoInvierno.model.ResponsiblePerson;
+import com.backend.ProyectoInvierno.model.Restaurant;
 import com.backend.ProyectoInvierno.repository.EstablishmentRepository;
 import com.backend.ProyectoInvierno.repository.LocationRepository;
 import com.backend.ProyectoInvierno.repository.PictureRepository;
@@ -71,8 +72,11 @@ public class RestaurantController {
     return establishment;
   }
   @GetMapping("/all")
-  public Iterable<Establishment> getAll(){
+  /*public Iterable<Establishment> getAll(){
     return establishmentRepository.findAll();
+  }*/
+  public List<Restaurant> getAll(){
+      return restaurantRepository.findAllRestauranWithEstablishment();
   }
   @GetMapping("/{id}")
     public ResponseEntity<ResponsiblePerson> getRestaurant(@PathVariable Long id){
