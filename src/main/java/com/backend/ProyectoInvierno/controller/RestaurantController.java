@@ -78,6 +78,11 @@ public class RestaurantController {
   public List<Restaurant> getAll(){
       return restaurantRepository.findAllRestauranWithEstablishment();
   }
+  @GetMapping("/all/infInmagenes")
+  public List<Restaurant> getRestImages(){
+      List<Restaurant> infoResPictures=restaurantRepository.findAllRestauranWithEstablishment();
+      return infoResPictures;
+  }
   @GetMapping("/{id}")
     public ResponseEntity<ResponsiblePerson> getRestaurant(@PathVariable Long id){
       ResponsiblePerson responsiblePerson = responsibleRepository.findById(id).orElse(null);
