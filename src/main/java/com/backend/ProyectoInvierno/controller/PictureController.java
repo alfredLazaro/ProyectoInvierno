@@ -48,4 +48,10 @@ public class PictureController {
         lisInfPictur=pictureRepository.findAllPicture();
         return lisInfPictur;
     }
+    /*@GetMapping("/inf/imagesC")
+    public List<Object[]> getInfImagesCom(){
+        List<Object[]> lisInfPictur=new ArrayList<>();
+        lisInfPictur=pictureRepository.findAllPicCom();
+        return lisInfPictur;
+    }*/
 }
