@@ -1,5 +1,6 @@
 package com.backend.ProyectoInvierno.controller;
 
+import com.backend.ProyectoInvierno.dto.PictureDTO;
 import com.backend.ProyectoInvierno.model.Picture;
 import com.backend.ProyectoInvierno.repository.PictureRepository;
 import com.backend.ProyectoInvierno.service.StorageService;
@@ -44,14 +45,20 @@ public class PictureController {
 
     @GetMapping("/inf/images")
     public List<Picture> getInfImages(){
-        List<Picture> lisInfPictur=new ArrayList<>();
-        lisInfPictur=pictureRepository.findAllPicture();
-        return lisInfPictur;
+        return pictureRepository.findAllPicture();
     }
     /*@GetMapping("/inf/imagesC")
-    public List<Object[]> getInfImagesCom(){
-        List<Object[]> lisInfPictur=new ArrayList<>();
-        lisInfPictur=pictureRepository.findAllPicCom();
-        return lisInfPictur;
+    public List<PictureDTO> getInfImagesCom(){
+
+        return pictureRepository.findAllPicWithRestaurant();
     }*/
+
+    @GetMapping("inf/images/restaurant")
+    public List<Picture> getImgRestau(){
+        return pictureRepository.findAllPicturesWithRestaurant();
+    }
+    @GetMapping("inf/images/restDto")
+    public List<PictureDTO> getImReDto(){
+        return pictureRepository.findPicturesDto();
+    }
 }
