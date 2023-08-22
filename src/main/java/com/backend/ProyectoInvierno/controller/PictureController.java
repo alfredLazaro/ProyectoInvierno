@@ -18,11 +18,22 @@ public class PictureController {
     @Autowired
     private StorageService storageService;
 
-    @PostMapping("/fileSystem")
-    public ResponseEntity<?> uploadImageToFileSystem(@RequestParam("images") MultipartFile[] files, @RequestParam("id_establishment") Long id_establishment) throws IOException {
+    @PostMapping("/accommodation")
+    public ResponseEntity<?> postImageAccommodation(@RequestParam("images") MultipartFile[] files, @RequestParam("id_establishment") Long id_establishment) throws IOException {
         String message = "";
         for(MultipartFile file : files){
-            String uploadImage = storageService.uploadImageToFileSystem(file, id_establishment);
+            String uploadImage = storageService.uploadImageAccommodation(file, id_establishment);
+            message += uploadImage + ",";
+        }
+        return ResponseEntity.status(HttpStatus.OK)
+                .body(message);
+    }
+
+    @PostMapping("/restaurant")
+    public ResponseEntity<?> postImageRestaurant(@RequestParam("images") MultipartFile[] files, @RequestParam("id_establishment") Long id_establishment) throws IOException {
+        String message = "";
+        for(MultipartFile file : files){
+            String uploadImage = storageService.uploadImageRestaurant(file, id_establishment);
             message += uploadImage + ",";
         }
         return ResponseEntity.status(HttpStatus.OK)

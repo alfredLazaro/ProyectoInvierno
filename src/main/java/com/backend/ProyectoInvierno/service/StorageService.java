@@ -10,6 +10,7 @@ import org.springframework.web.multipart.MultipartFile;
 import java.io.File;
 import java.io.IOException;
 import java.nio.file.Files;
+import java.nio.file.Paths;
 import java.util.Optional;
 
 @Service
@@ -17,10 +18,21 @@ public class StorageService {
     @Autowired
     private PictureRepository pictureRepository;
 
-    private static String FOLDER_PATH = System.getProperty("user.dir") + "/images/";
+    private static String FOLDER_PATH_ACCOMMODATION = Paths.get(System.getProperty("user.dir"),"images","accommodation",".").toString() ;
+    private static String FOLDER_PATH_RESTAURANT = Paths.get(System.getProperty("user.dir"),"images","restaurant",".").toString() ;
 
-    public String uploadImageToFileSystem(MultipartFile file, Long id_establishment) throws IOException {
-        String filePath = FOLDER_PATH+file.getOriginalFilename();
+    public String uploadImageAccommodation(MultipartFile file, Long id_establishment) throws IOException {
+        return uploadImageToFileSystem(file, id_establishment, FOLDER_PATH_ACCOMMODATION);
+    }
+
+    public String uploadImageRestaurant(MultipartFile file, Long id_establishment) throws IOException {
+        return uploadImageToFileSystem(file, id_establishment, FOLDER_PATH_RESTAURANT);
+    }
+
+    private String uploadImageToFileSystem(MultipartFile file, Long id_establishment, String path) throws IOException {
+        checkDirectory(path);
+
+        String filePath = path+file.getOriginalFilename();
         // Crear establecimiento para hacer referencia en BD
         Establishment establishment = new Establishment();
         establishment.setIdEstablishment(id_establishment);
@@ -36,6 +48,22 @@ public class StorageService {
             return file.getOriginalFilename();
         }
         return null;
+    }
+
+    private void checkDirectory(String path){
+        File directory = new File(path);
+
+        if (!directory.exists()) {
+            boolean created = directory.mkdirs();
+
+            if (created) {
+                System.out.println("Directorio creado en: " + path);
+            } else {
+                System.out.println("No se pudo crear el directorio en: " + path);
+            }
+        } else {
+            System.out.println("El directorio ya existe en: " + path);
+        }
     }
 
     public byte[] downloadImageFromFileSystem(Long id) throws IOException {
