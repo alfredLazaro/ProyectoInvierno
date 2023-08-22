@@ -45,9 +45,11 @@ public class AccommodationController {
 
   @GetMapping("/{idEstablishment}")
   public ResponseEntity<ResponsiblePerson> unAlojamiento(@PathVariable Long idEstablishment) {
+    // hace algo raro, pasa que findForId, busca todos los objetos con id iguales que este en el resposiblePerson
+    // osea que mismo id de establecimiento y responsible person... medio raro pero asi es...
     ResponsiblePerson responsiblePerson = responsibleRepository.findForId(idEstablishment);
     Establishment establishment = responsiblePerson.getEstablishments().stream().
-            filter(establishmen -> establishmen.getIdEstablishment()== idEstablishment).findFirst().get();
+            filter(establishmen -> establishmen.getIdEstablishment() == idEstablishment).findFirst().get();
     ResponsiblePerson responsiblePerson1 = new ResponsiblePerson();
     responsiblePerson1.setId(responsiblePerson.getId());
     responsiblePerson1.setName(responsiblePerson.getName());
@@ -59,15 +61,19 @@ public class AccommodationController {
   }
 
   @PostMapping
-  public Accommodation createAccomodation(@RequestBody Accommodation accommodation){
+  public Accommodation createAccomodation(@RequestBody Accommodation accommodation) {
     return accommondationRepository.save(accommodation);
   }
-
 
 
   @GetMapping()
   public ResponseEntity<List<Establishment>> accommodationList() {
     return ResponseEntity.ok(establishmentRepository.findAllEstablishments());
+  }
+
+  @GetMapping("/all")
+  public ResponseEntity<List<Accommodation>> allAccommodationList() {
+    return ResponseEntity.ok((accommondationRepository.findAllAccommondations()));
   }
 
 }

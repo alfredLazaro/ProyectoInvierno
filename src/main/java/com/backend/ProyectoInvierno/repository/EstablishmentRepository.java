@@ -12,6 +12,6 @@ import java.util.List;
 
 @Repository
 public interface EstablishmentRepository extends JpaRepository<Establishment, Long> {
-  @Query("SELECT est FROM Establishment est ")
+  @Query("SELECT est FROM Establishment est")
   List<Establishment> findAllEstablishments();
 }
