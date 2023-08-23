@@ -61,8 +61,6 @@ public class StorageService {
             } else {
                 System.out.println("No se pudo crear el directorio en: " + path);
             }
-        } else {
-            System.out.println("El directorio ya existe en: " + path);
         }
     }
 
